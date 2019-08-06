@@ -23,6 +23,7 @@ class CategoryProvider extends Component {
       this.token
     }&locale=es_ES`;
     let categories = await axios.get(url);
+
     this.setState({
       categories: categories.data.categories
     });
@@ -32,7 +33,7 @@ class CategoryProvider extends Component {
     return (
       <CategoryContext.Provider
         value={{
-          categories: this.categories
+          categories: this.state.categories
         }}
       >
         {this.props.children}

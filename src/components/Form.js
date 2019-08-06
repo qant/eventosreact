@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { CategoryConsumer } from "../context/CategoryContext";
 
 class Form extends Component {
   state = { name: "", category: "" };
@@ -21,7 +22,15 @@ class Form extends Component {
           </div>
           <div className="uk-margin" uk-margin="true">
             <select className="uk-select" name="category">
-              Gen with Cnsumer
+              <CategoryConsumer>
+                {value => {
+                  return value.categories.map(cat => (
+                    <option key={cat.id} value={cat.id} data-uk-form-select>
+                      {cat.name_localized}
+                    </option>
+                  ));
+                }}
+              </CategoryConsumer>
             </select>
           </div>
           <div>
