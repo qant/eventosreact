@@ -3,6 +3,13 @@ import { CategoryConsumer } from "../context/CategoryContext";
 
 class Form extends Component {
   state = { name: "", category: "" };
+
+  getFormData = e => {
+    this.setState({
+      [e.target.name]: e.target.value //ej. name: Blah
+    });
+  };
+
   render() {
     return (
       <form>
@@ -18,10 +25,18 @@ class Form extends Component {
               className="uk-input"
               type="text"
               placeholder="Name of Event or City"
+              onChange={this.getFormData}
             />
           </div>
           <div className="uk-margin" uk-margin="true">
-            <select className="uk-select" name="category">
+            <select
+              className="uk-select"
+              name="category"
+              onChange={this.getFormData}
+            >
+              <option value="" data-uk-form-select>
+                --Select Category--
+              </option>
               <CategoryConsumer>
                 {value => {
                   return value.categories.map(cat => (
